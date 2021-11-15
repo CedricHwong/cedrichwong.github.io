@@ -6,12 +6,12 @@
   <meta name="author" content="Huang Guangwei" />
   
   
-  <title>Hexo</title>
+  <title>Memory_analysis_about_list_and_array_in_Python | Hexo</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="Data Structure," />
   
 
   
@@ -38,7 +38,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2020-06-21",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Huang Guangwei",
     share: {"twitter":true,"weibo":true,"wechat":true},
@@ -160,170 +160,78 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="home">
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-11-13
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Memory_analysis_about_list_and_array_in_Python
+  </h1>
   
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2021-11-13
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/2021/11/13/Memory-analysis-about-list-and-array-in-Python/">Memory_analysis_about_list_and_array_in_Python</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              
-            
-          </div>
-          <a class="home-article-read" href="/2021/11/13/Memory-analysis-about-list-and-array-in-Python/">
-            READ MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/Data-Structure/"><i class="fa fa-tags"></i>Data Structure</a>
-            
-            </div>
-          
-        </div>
-        
-      </div>
-    </div>
+  <article class="passage-article">
+    <h1 id="0-Pre-knowledge"><a href="#0-Pre-knowledge" class="headerlink" title="0. Pre-knowledge"></a>0. Pre-knowledge</h1><p>In Python, the list () is a dynamic array of pointers, and the array object provided by the Array Module is a dynamic array that holds the same type of values. Since the array directly stores the value, it uses less memory than the list. Both lists and arrays are dynamic arrays, so when new elements are added to them, and there is no space to save new elements, they will automatically reallocate the memory block and copy the values in the original memory to the new memory block. </p>
+<p>In order to reduce the number of re-allocation of memory, usually every time it is re-allocated, the size is k times the original size. The larger the value of k, the fewer times the memory is re-allocated, but the more space is wasted. This section observes the memory allocation patterns of lists and arrays through a series of experiments.</p>
+
+<h3 id="list-storage-structure"><a href="#list-storage-structure" class="headerlink" title="list storage structure"></a>list storage structure</h3><p>After list() is instantiated, the structure is divided into 3 parts,</p>
+<p>-variable name:<br>list object (structured data + pointer array)</p>
+<p>-list content:<br>where id represents the position of the list object,</p>
+<p>“v”refers to the name of the variable, v[:] refers to the list object, this rule is also true for other sequence structures in python, the following examples can be used as evidence,</p>
+<blockquote>
+<p>When a=b, a and b point to the same list object</p>
+<p>When a=b[:], the list object of a and the list object of b point to the same list content</p>
+</blockquote>
+<p>In addition, [0] and [:1] are also different:</p>
+
+<pre><code>1. In [30]: a[0]
+2. Out[30]: 1
+3. 
+4. In [31]: a[:1]
+5. Out[31]: [1]</code></pre><p>Empty list memory space</p>
+
+<pre><code>1. In [32]: sys.getsizeof([])
+2. Out[32]: 64</code></pre><h1 id="1-Calculate-the-growth-mode-of-the-list-by-getsizeof"><a href="#1-Calculate-the-growth-mode-of-the-list-by-getsizeof" class="headerlink" title="1. Calculate the growth mode of the list by getsizeof()"></a>1. Calculate the growth mode of the list by getsizeof()</h1>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-Pre-knowledge"><span class="toc-text">0. Pre-knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#list-storage-structure"><span class="toc-text">list storage structure</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Calculate-the-growth-mode-of-the-list-by-getsizeof"><span class="toc-text">1. Calculate the growth mode of the list by getsizeof()</span></a></li></ol>
+  </div>
+</aside>
   
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2021-11-13
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/2021/11/13/Python/">Python</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              
-            
-          </div>
-          <a class="home-article-read" href="/2021/11/13/Python/">
-            READ MORE >>>
-          </a>
-          
+    <aside class="passage-copyright">
+      <div>本文作者: Cedric</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">http://cedrichwong.github.io/2021/11/13/Memory-analysis-about-list-and-array-in-Python/</a>
         </div>
-        
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 转载请注明出处!
       </div>
-    </div>
+    </aside>
   
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2021-06-16
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/2021/06/16/Construction-of-digital-currency-trading-system/">Construction of digital currency trading system</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              
-            
-          </div>
-          <a class="home-article-read" href="/2021/06/16/Construction-of-digital-currency-trading-system/">
-            READ MORE >>>
-          </a>
-          
-        </div>
-        
-      </div>
-    </div>
   
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2021-06-13
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/2021/06/13/AI_GreyScaleImage_coloring/">使用深度模型给灰度图上色的一些经验总结</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              
-            
-          </div>
-          <a class="home-article-read" href="/2021/06/13/AI_GreyScaleImage_coloring/">
-            READ MORE >>>
-          </a>
-          
-        </div>
-        
-      </div>
-    </div>
-  
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2020-06-21
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/2020/06/21/hello-world/">Hello World</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              
-            
-          </div>
-          <a class="home-article-read" href="/2020/06/21/hello-world/">
-            READ MORE >>>
-          </a>
-          
-        </div>
-        
-      </div>
+    <div class="passage-tags">
+     
+      <a href="/tags/Data-Structure/"><i class="fa fa-tags"></i>Data Structure</a>
+    
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -431,12 +339,12 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2021/11/13/Python/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     
