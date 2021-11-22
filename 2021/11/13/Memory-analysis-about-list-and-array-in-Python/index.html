@@ -191,14 +191,13 @@
 </blockquote>
 <p>In addition, [0] and [:1] are also different:</p>
 
-<pre><code>1. In [30]: a[0]
-2. Out[30]: 1
-3. 
-4. In [31]: a[:1]
-5. Out[31]: [1]</code></pre><p>Empty list memory space</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> In [<span class="number">30</span>]: a[<span class="number">0</span>]</span><br><span class="line"><span class="number">2.</span> Out[<span class="number">30</span>]: <span class="number">1</span></span><br><span class="line"><span class="number">3.</span> </span><br><span class="line"><span class="number">4.</span> In [<span class="number">31</span>]: a[:<span class="number">1</span>]</span><br><span class="line"><span class="number">5.</span> Out[<span class="number">31</span>]: [<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
-<pre><code>1. In [32]: sys.getsizeof([])
-2. Out[32]: 64</code></pre><h1 id="1-Calculate-the-growth-mode-of-the-list-by-getsizeof"><a href="#1-Calculate-the-growth-mode-of-the-list-by-getsizeof" class="headerlink" title="1. Calculate the growth mode of the list by getsizeof()"></a>1. Calculate the growth mode of the list by getsizeof()</h1><h3 id="Step1"><a href="#Step1" class="headerlink" title="Step1:"></a>Step1:</h3><p>sys.getsizeof() can get the memory size occupied by the list. Please write a program to calculate a list with a length of 10000, and each subscript of it saves the size of the list when it grows to this subscript:</p>
+<p>Empty list memory space</p>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> In [<span class="number">32</span>]: sys.getsizeof([])</span><br><span class="line"><span class="number">2.</span> Out[<span class="number">32</span>]: <span class="number">64</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="1-Calculate-the-growth-mode-of-the-list-by-getsizeof"><a href="#1-Calculate-the-growth-mode-of-the-list-by-getsizeof" class="headerlink" title="1. Calculate the growth mode of the list by getsizeof()"></a>1. Calculate the growth mode of the list by getsizeof()</h1><h3 id="Step1"><a href="#Step1" class="headerlink" title="Step1:"></a>Step1:</h3><p>sys.getsizeof() can get the memory size occupied by the list. Please write a program to calculate a list with a length of 10000, and each subscript of it saves the size of the list when it grows to this subscript:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="built_in">size</span> = []</span><br><span class="line"><span class="keyword">for</span> i in range(<span class="number">10000</span>):</span><br><span class="line">    <span class="built_in">size</span>.append(sys.getsizeof(<span class="built_in">size</span>))</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> pylab as pl</span><br><span class="line">pl.plot(<span class="built_in">size</span>, lw=<span class="number">2</span>, c=<span class="string">'b'</span>)</span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
 
 <h3 id="Step2："><a href="#Step2：" class="headerlink" title="Step2："></a>Step2：</h3><p>Calculate the resize_pos array representing the memory size of the list each time memory is allocated:</p>
